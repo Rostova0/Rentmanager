@@ -30,8 +30,8 @@ public class ReservationDao {
 	
 	private static final String CREATE_RESERVATION_QUERY = "INSERT INTO Reservation(client_id, vehicle_id, debut, fin) VALUES(?, ?, ?, ?);";
 	private static final String DELETE_RESERVATION_QUERY = "DELETE FROM Reservation WHERE id=?;";
-	private static final String FIND_RESERVATIONS_BY_CLIENT_QUERY = "SELECT id, vehicle_id, debut, fin FROM Reservation WHERE client_id=?;";
-	private static final String FIND_RESERVATIONS_BY_VEHICLE_QUERY = "SELECT id, client_id, debut, fin FROM Reservation WHERE vehicle_id=?;";
+	private static final String FIND_RESERVATIONS_BY_CLIENT_QUERY = "SELECT id, client_id,vehicle_id, debut, fin FROM Reservation WHERE client_id=?;";
+	private static final String FIND_RESERVATIONS_BY_VEHICLE_QUERY = "SELECT id, client_id,vehicle_id, debut, fin FROM Reservation WHERE vehicle_id=?;";
 	private static final String FIND_RESERVATIONS_QUERY = "SELECT id, client_id, vehicle_id, debut, fin FROM Reservation;";
 
 
@@ -98,7 +98,7 @@ public class ReservationDao {
 			ResultSet e = ps.executeQuery();
 			List<Reservation> lr=new ArrayList<>();
 				while (e.next()){
-					Reservation r = new Reservation(e.getInt(1),e.getInt(2),e.getDate(3).toLocalDate(),e.getDate(4).toLocalDate());
+					Reservation r = new Reservation(e.getInt(1),e.getInt(2),e.getInt(3),e.getDate(4).toLocalDate(),e.getDate(5).toLocalDate());
 					lr.add(r);
 				}
 				return lr;
