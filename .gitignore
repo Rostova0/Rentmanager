@@ -1,0 +1,21 @@
+# IntelliJ project files
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Compiled files
+out/
+target/
+
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Logs
+*.log
+
+# User-specific files
+*.swp
+*~
