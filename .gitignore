@@ -1,12 +1,16 @@
 # IntelliJ project files
-.idea/
+pom.xml
+.idea
+.settings
+.project
+.classpath
 *.iml
 *.ipr
 *.iws
 
 # Compiled files
 out/
-target/
+target
 
 # macOS system files
 .DS_Store
