@@ -8,6 +8,8 @@ import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.service.ReservationService;
 import com.epf.rentmanager.service.VehicleService;
 import com.epf.rentmanager.utils.IOUtils.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import java.io.IOException;
 import java.util.List;
@@ -28,11 +30,16 @@ public class HomeServlet extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	@Autowired
+	ClientService clientService;
+	VehicleService vehicleService;
+	ReservationService reservationService;
+	@Override
+	public void init() throws ServletException {
+		super.init();
+		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+	}
 
-	private static ClientService clientService = ClientService.getInstance();
-	private static VehicleService vehicleService=VehicleService.getInstance();
-
-	private static ReservationService reservationService=ReservationService.getInstance();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

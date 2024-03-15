@@ -1,1 +1,3 @@
-/Users/williamrikong/Documents/rentmanager/src/test/java/epf/AppTest.java
+/Users/williamrikong/Documents/rentmanager/src/test/java/epf/service/ClientServiceTest.java
+/Users/williamrikong/Documents/rentmanager/src/test/java/epf/service/VehicleServiceTest.java
+/Users/williamrikong/Documents/rentmanager/src/test/java/epf/service/ReservationServiceTest.java

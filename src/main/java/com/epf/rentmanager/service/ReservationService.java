@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 public class ReservationService {
     private ReservationDao reservationDao;
 
-    private ReservationService(ReservationDao reservationDao) {
+    public ReservationService(ReservationDao reservationDao) {
         this.reservationDao =reservationDao;
     }
 

@@ -14,7 +14,9 @@
 /Users/williamrikong/Documents/rentmanager/src/main/java/com/epf/rentmanager/except/ServiceException.java
 /Users/williamrikong/Documents/rentmanager/src/main/java/com/epf/rentmanager/persistence/ConnectionManager.java
 /Users/williamrikong/Documents/rentmanager/src/main/java/com/epf/rentmanager/service/ClientService.java
+/Users/williamrikong/Documents/rentmanager/src/main/java/com/epf/rentmanager/config/AppConfiguration.java
 /Users/williamrikong/Documents/rentmanager/src/main/java/com/epf/rentmanager/dao/ReservationDao.java
+/Users/williamrikong/Documents/rentmanager/src/main/java/com/epf/rentmanager/config/WebConfiguration.java
 /Users/williamrikong/Documents/rentmanager/src/main/java/com/epf/rentmanager/utils/IOUtils.java
 /Users/williamrikong/Documents/rentmanager/src/main/java/com/epf/rentmanager/servlet/HomeServlet.java
 /Users/williamrikong/Documents/rentmanager/src/main/java/com/epf/rentmanager/servlet/VehicleListServlet.java

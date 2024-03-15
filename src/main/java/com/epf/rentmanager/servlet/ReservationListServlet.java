@@ -11,17 +11,25 @@ import javax.servlet.http.HttpServletResponse;
 import com.epf.rentmanager.except.DaoException;
 import com.epf.rentmanager.except.ServiceException;
 import com.epf.rentmanager.model.Reservation;
+import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.service.ReservationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import static com.epf.rentmanager.utils.IOUtils.print;
 
 @WebServlet("/rents")
 public class ReservationListServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
+    @Autowired
+    ReservationService reservationService;
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+    }
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ReservationService reservationService = ReservationService.getInstance();
         try {
             List<Reservation> reservations = reservationService.findAll();
             request.setAttribute("reservations", reservations);

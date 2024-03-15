@@ -7,8 +7,10 @@ com/epf/rentmanager/except/ServiceException.class
 com/epf/rentmanager/servlet/HomeServlet.class
 com/epf/rentmanager/persistence/ConnectionManager.class
 com/epf/rentmanager/servlet/ReservationListServlet.class
+com/epf/rentmanager/config/WebConfiguration.class
 com/epf/rentmanager/service/VehicleService.class
 com/epf/rentmanager/dao/VehicleDao.class
+com/epf/rentmanager/config/AppConfiguration.class
 com/epf/rentmanager/except/DaoException.class
 com/epf/rentmanager/service/ClientService.class
 com/epf/rentmanager/servlet/ClientListServlet.class

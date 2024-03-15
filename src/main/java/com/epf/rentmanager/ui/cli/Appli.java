@@ -20,6 +20,7 @@ import static com.epf.rentmanager.utils.IOUtils.*;
 
 public class Appli {
 
+    /*
     private static ClientService clientService = ClientService.getInstance();
     private static VehicleService vehicleService=VehicleService.getInstance();
 
@@ -176,4 +177,6 @@ public class Appli {
             }
         }
     }
+
+     */
 }
