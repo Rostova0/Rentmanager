@@ -1,31 +1,36 @@
 package com.epf.rentmanager.service;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
 import com.epf.rentmanager.except.DaoException;
 import com.epf.rentmanager.except.ServiceException;
-import com.epf.rentmanager.model.Client;
 import com.epf.rentmanager.model.Vehicle;
-import com.epf.rentmanager.dao.ClientDao;
 import com.epf.rentmanager.dao.VehicleDao;
 import org.springframework.stereotype.Service;
+
+import static com.epf.rentmanager.utils.IOUtils.print;
 
 
 @Service
 public class VehicleService {
 
 	private VehicleDao vehicleDao;
+	private ReservationService reservationService;
 
 	
 	public VehicleService(VehicleDao vehicleDao) {
 		this.vehicleDao = vehicleDao;
 	}
 
-	
-	
+	public void setReservationService(ReservationService reservationService) {
+		this.reservationService = reservationService;
+	}
+
 	public long create(Vehicle vehicle) throws ServiceException {
+		if (vehicle.getNb_places() < 2 || vehicle.getNb_places() > 9) {
+			print("Le nombre de places doit être compris entre 2 et 9.");
+		}
 		try {
 			return vehicleDao.create(vehicle);
 		}catch (DaoException e){
@@ -35,6 +40,7 @@ public class VehicleService {
 
 	public long delete(Vehicle vehicle) throws ServiceException {
 		try {
+			reservationService.deleteReservationsByVehicleId(vehicle.getId());
 			return vehicleDao.delete(vehicle);
 		}catch (DaoException e){
 			throw new ServiceException(e.getMessage());

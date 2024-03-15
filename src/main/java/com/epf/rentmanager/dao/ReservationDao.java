@@ -27,11 +27,10 @@ public class ReservationDao {
 	private static final String FIND_RESERVATIONS_BY_CLIENT_QUERY = "SELECT id, client_id,vehicle_id, debut, fin FROM Reservation WHERE client_id=?;";
 	private static final String FIND_RESERVATIONS_BY_VEHICLE_QUERY = "SELECT id, client_id,vehicle_id, debut, fin FROM Reservation WHERE vehicle_id=?;";
 	private static final String FIND_RESERVATIONS_QUERY = "SELECT id, client_id, vehicle_id, debut, fin FROM Reservation;";
+	private static final String FIND_BY_VEHICLE_AND_DATE_QUERY = "SELECT * FROM reservations WHERE vehicle_id = ? AND date = ?";
+	private static final String FIND_BY_CLIENT_AND_VEHICLE_QUERY = "SELECT * FROM reservations WHERE client_id = ? AND vehicle_id = ?";
 
 
-
-
-		
 	public long create(Reservation reservation) throws DaoException {
 		try (Connection connection=ConnectionManager.getConnection();
 			 PreparedStatement ps= connection.prepareStatement(CREATE_RESERVATION_QUERY,Statement.RETURN_GENERATED_KEYS);){
@@ -116,6 +115,53 @@ public class ReservationDao {
 		} catch (SQLException e) {
 			throw new DaoException(e.getMessage());
 		}
+	}
+
+	public List<Reservation> findByVehicleAndDate(long vehicleId, LocalDate date) throws DaoException {
+		List<Reservation> reservations = new ArrayList<>();
+		try (Connection connection = ConnectionManager.getConnection();
+			 PreparedStatement ps = connection.prepareStatement(FIND_BY_VEHICLE_AND_DATE_QUERY)) {
+			ps.setLong(1, vehicleId);
+			ps.setDate(2, java.sql.Date.valueOf(date));
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next()) {
+					Reservation reservation = new Reservation(
+							rs.getInt("id"),
+							rs.getInt("vehicle_id"),
+							rs.getInt("client_id"),
+							rs.getDate("date").toLocalDate(),
+							rs.getDate("end_date").toLocalDate()
+					);
+					reservations.add(reservation);
+				}
+			}
+		} catch (SQLException e) {
+			throw new DaoException(e.getMessage());
+		}
+		return reservations;
+	}
+
+	public List<Reservation> findByClientAndVehicle(long clientId, long vehicleId) throws DaoException {
+		List<Reservation> reservations = new ArrayList<>();
+		try (Connection connection = ConnectionManager.getConnection();
+			 PreparedStatement ps = connection.prepareStatement(FIND_BY_CLIENT_AND_VEHICLE_QUERY)) {
+			ps.setLong(1, clientId);
+			ps.setLong(2, vehicleId);
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next()) {
+					Reservation reservation = new Reservation(
+							rs.getInt("client_id"),
+							rs.getInt("vehicle_id"),
+							rs.getDate("debut").toLocalDate(),
+							rs.getDate("fin").toLocalDate()
+					);
+					reservations.add(reservation);
+				}
+			}
+		} catch (SQLException e) {
+			throw new DaoException(e.getMessage());
+		}
+		return reservations;
 	}
 }
 

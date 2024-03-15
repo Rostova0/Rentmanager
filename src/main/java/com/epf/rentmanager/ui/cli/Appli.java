@@ -1,5 +1,5 @@
 package com.epf.rentmanager.ui.cli;
-
+/*
 import com.epf.rentmanager.except.DaoException;
 import com.epf.rentmanager.except.ServiceException;
 import com.epf.rentmanager.model.Client;
@@ -20,7 +20,6 @@ import static com.epf.rentmanager.utils.IOUtils.*;
 
 public class Appli {
 
-    /*
     private static ClientService clientService = ClientService.getInstance();
     private static VehicleService vehicleService=VehicleService.getInstance();
 
@@ -179,4 +178,3 @@ public class Appli {
     }
 
      */
-}

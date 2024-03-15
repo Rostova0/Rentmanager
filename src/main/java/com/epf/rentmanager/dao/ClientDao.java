@@ -27,6 +27,7 @@ public class ClientDao {
 	private static final String DELETE_CLIENT_QUERY = "DELETE FROM Client WHERE id=?;";
 	private static final String FIND_CLIENT_QUERY = "SELECT nom, prenom, email, naissance FROM Client WHERE id=?;";
 	private static final String FIND_CLIENTS_QUERY = "SELECT id, nom, prenom, email, naissance FROM Client;";
+	private static final String FIND_BY_EMAIL_QUERY = "SELECT * FROM clients WHERE email = ?";
 
 	public long create(Client client) throws DaoException {
 		try (Connection connection = ConnectionManager.getConnection();
@@ -99,6 +100,30 @@ public class ClientDao {
 			throw new DaoException(e.getMessage());
 		}
 	}
+
+	public List<Client> findByEmail(String email) throws DaoException {
+		List<Client> clients = new ArrayList<>();
+		try (Connection connection = ConnectionManager.getConnection();
+			 PreparedStatement ps = connection.prepareStatement(FIND_BY_EMAIL_QUERY)) {
+			ps.setString(1, email);
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next()) {
+					Client client = new Client(
+							rs.getInt("id"),
+							rs.getString("nom"),
+							rs.getString("prenom"),
+							rs.getString("email"),
+							rs.getDate("naissance").toLocalDate()
+					);
+					clients.add(client);
+				}
+			}
+		} catch (SQLException e) {
+			throw new DaoException(e.getMessage());
+		}
+		return clients;
+	}
+
 }
 
 

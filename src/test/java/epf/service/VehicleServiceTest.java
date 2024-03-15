@@ -16,6 +16,7 @@ public class VehicleServiceTest {
     private VehicleDao vehicleDaoMock;
     private VehicleService vehicleService;
 
+
     @BeforeEach
     public void setUp() {
         vehicleDaoMock = mock(VehicleDao.class);
