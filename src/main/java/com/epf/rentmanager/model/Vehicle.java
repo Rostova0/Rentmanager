@@ -55,6 +55,10 @@ public class Vehicle {
         this.nb_places = nb_places;
     }
 
+    public static boolean isNbPlacesOK(Vehicle vehicle) {
+        return vehicle.nb_places >= 2 && vehicle.nb_places <= 9;
+    }
+
     public String toString() {
         return "Vehicle{" +
                 "id=" + id +

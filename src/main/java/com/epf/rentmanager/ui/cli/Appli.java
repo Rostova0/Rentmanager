@@ -1,5 +1,6 @@
 package com.epf.rentmanager.ui.cli;
 
+import com.epf.rentmanager.config.AppConfiguration;
 import com.epf.rentmanager.except.DaoException;
 import com.epf.rentmanager.except.ServiceException;
 import com.epf.rentmanager.model.Client;
@@ -9,6 +10,8 @@ import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.service.ReservationService;
 import com.epf.rentmanager.service.VehicleService;
 import com.epf.rentmanager.utils.IOUtils;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -20,12 +23,15 @@ import static com.epf.rentmanager.utils.IOUtils.*;
 
 public class Appli {
 
-    private static ClientService clientService = ClientService.getInstance();
-    private static VehicleService vehicleService=VehicleService.getInstance();
-
-    private static ReservationService reservationService=ReservationService.getInstance();
+    private static ClientService clientService;
+    private  static VehicleService vehicleService;
+    private static  ReservationService reservationService;
 
     public static void main (String[] args){
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfiguration.class);
+        clientService = context.getBean(ClientService.class);
+        vehicleService = context.getBean(VehicleService.class);
+        reservationService = context.getBean(ReservationService.class);
 
         Scanner scan=new Scanner(System.in);
         while(true){
@@ -143,7 +149,7 @@ public class Appli {
                     try {
                         Client c= new Client();
                         c.setId(idCsup);
-                        clientService.delete(c);
+                        clientService.delete(c.getId());
                         print("Client supprimer");
 
                     }catch (ServiceException e){
@@ -155,7 +161,7 @@ public class Appli {
                     try {
                         Vehicle v= new Vehicle();
                         v.setId(idVsup);
-                        vehicleService.delete(v);
+                        vehicleService.delete(v.getId());
                         print("Vehicule supprimer");
                     }catch (ServiceException e){
                         print("Vous tentez peut-etre de supprimer un vehicule inexistant");
@@ -167,7 +173,7 @@ public class Appli {
                     try {
                         Reservation r=new Reservation();
                         r.setId(resaId);
-                        reservationService.delete(r);
+                        reservationService.delete(r.getId());
                         print("Réservation supprimée avec succès !");
                     } catch (ServiceException e) {
                         print("Un problème a été rencontré, veuillez réessayer");

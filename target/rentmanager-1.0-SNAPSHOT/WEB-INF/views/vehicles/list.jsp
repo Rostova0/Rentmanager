@@ -42,16 +42,16 @@
                                     <td>${vehicle.modele}</td>
                                     <td>${vehicle.nb_places}</td>
                                     <!--<td>John Doe</td>-->
-                                    <td>
-                                        <a class="btn btn-primary disabled" href="car-detail.html">
-                                            <i class="fa fa-play"></i>
-                                        </a>
-                                        <a class="btn btn-success disabled" href="#">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        <a class="btn btn-danger disabled" href="#">
-                                            <i class="fa fa-trash"></i>
-                                        </a>
+                                    <td
+                                                                 <a class="btn btn-primary disabled" href="${pageContext.request.contextPath}/cars/details?id=${reservation.id}">
+                                                                     <i class="fa fa-play"></i>
+                                                                 </a>
+                                                                 <a class="btn btn-success disabled" href="${pageContext.request.contextPath}/cars/edit?id=${reservation.id}">
+                                                                     <i class="fa fa-edit"></i>
+                                                                 </a>
+                                                                 <a class="btn btn-danger disabled" href="${pageContext.request.contextPath}/cars/delete?id=${reservation.id}">
+                                                                     <i class="fa fa-trash"></i>
+                                                                 </a>
                                     </td>
                                 </tr>
                                 </c:forEach>

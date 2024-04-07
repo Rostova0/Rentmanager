@@ -43,13 +43,13 @@
                                                                       <td>${client.naissance}</td>
                                                                       <!--<td>John Doe</td>-->
                                                                       <td>
-                                        <a class="btn btn-primary" href="${pageContext.request.contextPath}/client/details?id=1">
+                                        <a class="btn btn-primary" href="${pageContext.request.contextPath}/client/details?id=${client.id}">
                                         <i class="fa fa-play"></i>
                                         </a>
-                                        <a class="btn btn-success disabled" href="#">
+                                        <a class="btn btn-success" href="${pageContext.request.contextPath}/client/edit?id=${client.id}">
                                             <i class="fa fa-edit"></i>
                                         </a>
-                                        <a class="btn btn-danger disabled" href="#">
+                                        <a class="btn btn-danger" href="${pageContext.request.contextPath}/client/delete?id=${client.id}">
                                             <i class="fa fa-trash"></i>
                                         </a>
                                     </td>

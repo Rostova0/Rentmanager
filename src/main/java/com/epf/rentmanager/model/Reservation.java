@@ -1,7 +1,12 @@
 package com.epf.rentmanager.model;
 
 
+import com.epf.rentmanager.except.ServiceException;
+import com.epf.rentmanager.service.ReservationService;
+
 import java.time.LocalDate;
+import java.time.Period;
+import java.util.List;
 
 public class Reservation {
     private int id;
@@ -69,6 +74,31 @@ public class Reservation {
         this.fin = fin;
     }
 
+    public static boolean isCarNotRentUnder7days(Reservation rent) {
+        Period period = Period.between(rent.getDebut(),rent.getFin());
+        return period.getDays() < 7;
+    }
+
+    public static boolean isNotTheSameDay(Reservation rent, ReservationService rentService) throws ServiceException {
+        List<Reservation> reservation;
+        reservation = rentService.findResaByVehicleId(rent.vehicle_id);
+        for (int i = 0; i < reservation.size(); i++) {
+            if (rent.getDebut().isAfter(reservation.get(i).getDebut()) && rent.getDebut().isBefore(reservation.get(i).getFin())) {
+                return false;
+            }
+            if (rent.getFin().isAfter(reservation.get(i).getDebut()) && rent.getFin().isBefore(reservation.get(i).getFin())) {
+                return false;
+            }
+            if (reservation.get(i).getDebut().isAfter(rent.getDebut()) && reservation.get(i).getDebut().isBefore(rent.getFin())) {
+                return false;
+            }
+            if (reservation.get(i).getDebut().isEqual(rent.getDebut()) && reservation.get(i).getFin().isEqual(rent.getFin())) {
+                return false;
+            }
+
+        }
+        return true;
+    }
     @Override
     public String toString() {
         return "Reservation{" +
