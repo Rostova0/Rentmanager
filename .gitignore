@@ -1,5 +1,8 @@
 # IntelliJ project files
-.idea/
+.idea
+.settings
+.classpath
+.project
 *.iml
 *.ipr
 *.iws
